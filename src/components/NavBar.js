@@ -33,17 +33,17 @@ const ImgLogo = styled.img`
 	width: 50px;
 `;
 
-const UserButton = styled.div`
+const UserButton = styled.button`
+	background-color: transparent;
+	border: none;
+	color: white;
 	text-align: center;
 	margin-right: 10px;
+	font-size: 16px;
 `;
 
 const UserLogo = styled.img`
 	width: 32px;
-`;
-
-const UserText = styled.p`
-	font-size: 16px;
 `;
 
 export const NavBar = () => (
@@ -54,7 +54,7 @@ export const NavBar = () => (
 		</Logo>
 		<UserButton>
 			<UserLogo src={userImg} alt='user-logo'/>
-			<UserText>Войти</UserText>
+			<p>Войти</p>
 		</UserButton>
 	</NavBarStyled>
 );
