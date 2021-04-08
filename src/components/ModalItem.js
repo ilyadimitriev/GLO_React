@@ -57,7 +57,13 @@ const AddBtn = styled.button`
 	color: white;
 	font-family: Roboto;
 	font-size: 21px;
-	border: none;
+	border: 2px solid #299B01;
+	transition: color, background, 100ms;
+	&:hover {
+		background: white;
+		color: #299B01;
+		transition: color, background, 100ms;
+	}
 `;
 
 export const ModalItem = ({openItem, setOpenItem}) => {
