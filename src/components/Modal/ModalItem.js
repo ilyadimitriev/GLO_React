@@ -66,13 +66,22 @@ const AddBtn = styled.button`
 	}
 `;
 
-export const ModalItem = ({openItem, setOpenItem}) => {
-	if(!openItem) return null;
-	function closeModal(e) {
+export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
+	const closeModal = (e) => {
 		if (e.target.id === 'overlay') {
 			setOpenItem(null);
 		}
 	}
+
+	const order = {
+		...openItem
+	};
+
+	const addToOrder = () => {
+		setOrders([...orders, order]);
+		setOpenItem(null);
+	}
+
 	return (
 		<Overlay id="overlay" onClick={closeModal}>
 			<Modal>
@@ -85,7 +94,7 @@ export const ModalItem = ({openItem, setOpenItem}) => {
 					currency: 'RUB'
 				})}</ItemPrice>
 				</ItemInfo>
-				<AddBtn>Добавить</AddBtn>
+				<AddBtn onClick={addToOrder}>Добавить</AddBtn>
 			</Modal>
 		</Overlay>
 	)

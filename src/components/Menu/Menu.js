@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import dbMenu from './DBMenu';
+import dbMenu from '../DBMenu';
 import { ListItem } from './ListItem';
 
-import bannerImg from '../img/banner.png';
+import bannerImg from './banner.png';
 
 const MenuStyled = styled.main`
 	margin-top: 80px;
