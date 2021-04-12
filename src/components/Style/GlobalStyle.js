@@ -28,7 +28,7 @@ export const GlobalStyle = createGlobalStyle`
 	}
 
 	input, button {
-		font-family: inherit;
+		font: inherit;
 	}
 
 	a {
@@ -51,5 +51,13 @@ export const GlobalStyle = createGlobalStyle`
 	p {
 		margin: 0;
 		padding: 0;
+	}
+
+	input[type='number'] {
+		-moz-appearance: textfield;
+	}
+	input::-webkit-outer-spin-button,
+	input::-webkit-outer-inner-button {
+		-webkit-appearance: none;
 	}
 `;
