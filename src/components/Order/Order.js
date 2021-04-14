@@ -31,6 +31,8 @@ const OrderList = styled.ul`
 
 const Total = styled.div`
 	display: flex;
+	justify-content: space-between;
+	width: 100%;
 `;
 
 const ConfirmBtn = styled.button`
@@ -59,6 +61,8 @@ export const Order = ({ orders }) => {
 
 	const total = orders.reduce((result, order) => (totalPriceItems(order) + result), 0);
 
+	const totalCounter = orders.reduce((result, order) => (order.count + result), 0);
+
 	return (
 		<>
 			<OrderStyled>
@@ -70,7 +74,11 @@ export const Order = ({ orders }) => {
 						</OrderList> :
 						<EmptyList>Список заказов пуст</EmptyList>}
 				</OrderContent>
-				<Total>{toLocaleCurrency(total)}</Total>
+				<Total>
+					<span>Итого:</span>
+					<span>{totalCounter}</span>
+					{toLocaleCurrency(total)}
+					</Total>
 				<ConfirmBtn>Оформить</ConfirmBtn>
 			</OrderStyled>
 		</>
