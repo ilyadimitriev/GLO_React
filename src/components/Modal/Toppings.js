@@ -1,40 +1,24 @@
 import React from 'react';
-import styled from 'styled-components';
 
-const ToppingWrap = styled.div`
-	padding: 0 53px 0 37px;
-	margin: 0 auto;
-	column-count: 2;
-	column-gap: 5px;
-`;
-
-const ToppingLabel = styled.label`
-	cursor: pointer;
-	display: block;
-`;
-
-const ToppingCheckbox = styled.input`
-	cursor: pointer;
-	margin-right: 5px;
-`;
+import { OptionWrap, OptionLabel, OptionCheckbox } from '../Style/OptionsStyle';
 
 
 export const Toppings = ({toppings, checkToppings}) => {
 	return (
 		<>
 			<h3>Добавки</h3>
-			<ToppingWrap>
+			<OptionWrap>
 				{toppings.map((item, i) => (
-					<ToppingLabel  key={i}>
-						<ToppingCheckbox
+					<OptionLabel key={i}>
+						<OptionCheckbox
 							type="checkbox"
 							checked={item.checked}
 							onChange={() => checkToppings(i)}	
 						/>
 						{item.name}
-					</ToppingLabel>
+					</OptionLabel>
 				))}
-			</ToppingWrap>
+			</OptionWrap>
 		</>
 	)
 }

@@ -2,8 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { CountItem } from './CountItem';
 import { Toppings } from './Toppings';
+import { Choices } from './Choices';
 import { useCount } from '../Hooks/useCount';
 import { useToppings } from '../Hooks/useToppings';
+import { useChoices } from '../Hooks/useChoices';
 import { totalPriceItems } from '../Functions/secondaryFunction';
 import { toLocaleCurrency } from '../Functions/secondaryFunction';
 
@@ -69,6 +71,11 @@ const AddBtn = styled.button`
 		color: #299B01;
 		transition: color, background, 100ms;
 	}
+	&:disabled {
+		background: #ccc;
+		color: #bbb;
+		border: 2px solid #aaa;
+	}
 `;
 
 const TotalPriceItem= styled.div`
@@ -83,6 +90,7 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 
 	const counter = useCount();
 	const toppings =  useToppings(openItem);
+	const choices = useChoices(openItem);
 
 	const closeModal = (e) => {
 		if (e.target.id === 'overlay') {
@@ -93,7 +101,8 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 	const order = {
 		...openItem,
 		count: counter.count,
-		topping: toppings.toppings
+		topping: toppings.toppings,
+		choices: choices.choice
 	};
 
 	const addToOrder = () => {
@@ -112,11 +121,15 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 				</ItemInfo>
 				<CountItem {...counter}/>
 				{openItem.toppings && <Toppings {...toppings}/>}
+				{openItem.choices && <Choices {...choices} openItem={openItem}/>}
 				<TotalPriceItem>
 					<span>Цена:</span>
 					<span>{toLocaleCurrency(totalPriceItems(order))}</span>
 				</TotalPriceItem>
-				<AddBtn onClick={addToOrder}>Добавить</AddBtn>
+				<AddBtn
+					onClick={addToOrder}
+					disabled={order.choices && !order.choice}
+				>Добавить</AddBtn>
 			</Modal>
 		</Overlay>
 	)

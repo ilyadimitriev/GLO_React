@@ -7,6 +7,7 @@ import { toLocaleCurrency } from '../Functions/secondaryFunction';
 
 const OrderItemStyled = styled.li`
 	display: flex;
+	flex-wrap: wrap;
 	width: 100%;
 	&:not(:last-of-type) {
 		margin-bottom: 28px;
@@ -36,13 +37,25 @@ const TrashBtn = styled.button`
 	background-size: cover;
 `;
 
+const Toppings = styled.div`
+	width: 100%;
+	color: #9a9a9a;
+	font-size: 14px;
+`;
+
 export const OrderListItem = ({ order }) => {
+
+	const topping = order.topping.filter(item => item.checked)
+		.map(item => item.name)
+		.join(', ');
+
 	return (
 		<OrderItemStyled>
-			<ItemName>{order.name}</ItemName>
+			<ItemName>{order.name} {order.choice}</ItemName>
 			<ItemAmount>{order.count}</ItemAmount>
 			<ItemPrice>{toLocaleCurrency(totalPriceItems(order))}</ItemPrice>
 			<TrashBtn/>
+			{topping && <Toppings>{topping}</Toppings>}
 		</OrderItemStyled>
 	)
 };

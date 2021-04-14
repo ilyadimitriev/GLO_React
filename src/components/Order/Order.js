@@ -10,7 +10,7 @@ const OrderStyled = styled.section`
 	left: 0;
 	display: flex;
 	flex-direction: column;
-	min-width: 380px;
+	width: 380px;
 	padding: 20px;
 	background: #fff;
 	height: calc(100% - 80px);
