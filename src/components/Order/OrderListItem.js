@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import trashImg from './trash.svg';
 import { totalPriceItems } from '../Functions/secondaryFunction';
@@ -16,10 +16,11 @@ const OrderItemStyled = styled.li`
 
 const ItemName = styled.span`
 	flex-grow: 1;
+	cursor: pointer;
 `;
 
 const ItemAmount = styled.span`
-
+	cursor: pointer;
 `;
 
 const ItemPrice = styled.span`
@@ -41,6 +42,7 @@ const Toppings = styled.div`
 	width: 100%;
 	color: #9a9a9a;
 	font-size: 14px;
+	cursor: pointer;
 `;
 
 export const OrderListItem = ({ order, index, deleteItem, setOpenItem }) => {
@@ -49,12 +51,14 @@ export const OrderListItem = ({ order, index, deleteItem, setOpenItem }) => {
 		.map(item => item.name)
 		.join(', ');
 
+	const refDeleteButton = useRef(null);
+
 	return (
-		<OrderItemStyled onClick={() => setOpenItem({...order, index})}>
+		<OrderItemStyled onClick={(e) => e.target !== refDeleteButton.current && setOpenItem({...order, index})}>
 			<ItemName>{order.name} {order.choice}</ItemName>
 			<ItemAmount>{order.count}</ItemAmount>
 			<ItemPrice>{toLocaleCurrency(totalPriceItems(order))}</ItemPrice>
-			<TrashBtn onClick={() => deleteItem(index)}/>
+			<TrashBtn ref={refDeleteButton} onClick={() => deleteItem(index)}/>
 			{topping && <Toppings>{topping}</Toppings>}
 		</OrderItemStyled>
 	)
